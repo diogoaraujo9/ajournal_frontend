@@ -1,0 +1,12 @@
+.core-element {
+    height: 100%;
+    transition: padding-left 0.4s;
+}
+
+.menu-open {
+    padding-left: 190px;
+}
+
+.menu-closed {
+    padding-left: 50px;
+}

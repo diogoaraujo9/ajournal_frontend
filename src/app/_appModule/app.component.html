@@ -1,0 +1,13 @@
+<div class="core-element"
+  [class.menu-open]="isMenuOpen"
+  [class.menu-closed]="!isMenuOpen">
+  
+  <lateral-menu (onClickToggleButton)=toggleMenuPadding($event)>
+  </lateral-menu>
+  
+  <top-menu>
+  </top-menu>
+  
+  <router-outlet></router-outlet>
+  
+</div>

@@ -1,0 +1,18 @@
+<div class="lateral-menu"
+  [class.menu-open]="isMenuOpen"
+  [class.menu-closed]="!isMenuOpen">
+
+    <div class="ajournal-logo-container">
+      <img class="ajournal-logo" 
+        (click)="toggleMenu()"
+        src="https://cdn.icon-icons.com/icons2/936/PNG/512/font-symbol-of-letter-a_icon-icons.com_73556.png">
+      <span class="ajournal-name block-selection" [class.fade]="!isMenuOpen">A' Journal</span>
+    </div>
+
+    <div class="product-container">
+      <img class="product-icon"
+        src="https://image.flaticon.com/icons/png/512/42/42446.png">
+      <span class="product-name block-selection" [class.fade]="!isMenuOpen">Daily</span>    
+    </div>
+    
+</div>
