@@ -5,6 +5,7 @@ const routes: Routes = [
     { path: '', pathMatch: 'full', redirectTo: 'login' },
     { path: 'daily', loadChildren: '../modules/daily/daily.module#DailyModule', data: { roles: [] } },
     { path: 'login', loadChildren: '../modules/login/login.module#LoginModule', data: { roles: [] } },    
+    { path: 'register', loadChildren: '../modules/register/register.module#RegisterModule', data: { roles: [] } },    
     { path: '**', pathMatch: 'full', redirectTo: 'login' }
 ];
 
