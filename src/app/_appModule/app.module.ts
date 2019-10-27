@@ -7,6 +7,7 @@ import { HttpTestService } from '../httpTeste.service';
 import { HttpModule } from '@angular/http';
 import { LateralMenuComponent } from './components/lateral-menu/lateral-menu.component';
 import { TopMenuComponent } from './components/top-menu/top-menu.component';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { TopMenuComponent } from './components/top-menu/top-menu.component';
     HttpModule
   ],
   providers: [
-    HttpTestService
+    HttpTestService,
+    {provide: LocationStrategy, useClass: HashLocationStrategy}
   ],
   bootstrap: [AppComponent]
 })
