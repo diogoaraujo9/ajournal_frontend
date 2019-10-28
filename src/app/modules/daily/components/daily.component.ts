@@ -14,15 +14,14 @@ export class DailyComponent {
 
     public createTask()
     {
-        debugger;
         let taskExample: Task = {
             description: "TESTE"
         };
 
         this.taskService.saveTask(taskExample).subscribe(x => {
-            debugger;
+
         }, err => {
-            debugger;
+
         });
     }
 }

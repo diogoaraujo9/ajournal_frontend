@@ -4,12 +4,14 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { Login } from '../model/login.model';
+import { CoreHttpService } from 'src/app/coreHttp.service';
 
 @Injectable()
 export class LoginService {
     private headers = new Headers();
     
-    constructor(private http : Http) 
+    constructor(private http : Http,
+        public _coreHttpService: CoreHttpService) 
     {
         this.headers.set('Content-Type', 'application/json');
     }
@@ -19,7 +21,7 @@ export class LoginService {
         debugger;
         let options = new RequestOptions( { headers : this.headers });
 
-        return this.http.post(`http://localhost:8080/api/login`, login, options)
+        return this.http.post(`${this._coreHttpService.urlAPI}/api/login`, login, options)
         .pipe(map(this.extractData))
         .pipe(catchError(this.handleError));
     }

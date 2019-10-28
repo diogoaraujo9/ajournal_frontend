@@ -1,11 +1,11 @@
 import 'rxjs/Rx';
 import { Http, Response, Headers, RequestOptions, ResponseContentType } from '@angular/http';
-import { Injectable } from '@angular/core';
+import { Injectable, isDevMode } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
 @Injectable()
-export class HttpTestService {
+export class CoreHttpService {
     private headers = new Headers();
     
     constructor(private http : Http) 
@@ -20,6 +20,11 @@ export class HttpTestService {
         return this.http.post(`http://localhost:8080/api/teste`, {}, options)
         .pipe(map(this.extractData))
         .pipe(catchError(this.handleError));
+    }
+
+    public get urlAPI()
+    {
+        return isDevMode() ? "http://localhost:1337" : "http://ajournal.azurewebsites.net";
     }
 
     private extractData(res: Response) {

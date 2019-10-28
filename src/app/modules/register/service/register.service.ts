@@ -4,22 +4,23 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { Register } from '../model/register.model';
+import { CoreHttpService } from 'src/app/coreHttp.service';
 
 @Injectable()
 export class RegisterService {
     private headers = new Headers();
     
-    constructor(private http : Http) 
+    constructor(private http : Http,
+        public _coreHttpService: CoreHttpService) 
     {
         this.headers.set('Content-Type', 'application/json');
     }
 
     public saveRegister(register: Register): Observable<any>
     {
-        debugger;
         let options = new RequestOptions( { headers : this.headers });
 
-        return this.http.post(`http://localhost:8080/api/register`, register, options)
+        return this.http.post(`${this._coreHttpService.urlAPI}/api/register`, register, options)
         .pipe(map(this.extractData))
         .pipe(catchError(this.handleError));
     }
