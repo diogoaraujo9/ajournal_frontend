@@ -1,18 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { TaskService } from '../../service/task.service';
-import { Task } from '../../model/task.model';
 import * as moment from 'moment';
 import { Moment } from 'moment';
 import { DiaDaSemana } from '../../model/diaDaSemana.model';
 import { TipoDeRegistro } from '../../enum/tipoDeRegistro.enum';
-import { Registro } from '../../model/registro.model';
 
 @Component({
-    selector: 'journal-daily',
+    selector: 'listagem-de-dias',
     templateUrl: './listagemDias.component.html',
     styleUrls: ['./listagemDias.component.scss']
 })
-export class DailyComponent implements OnInit {
+export class ListagemDeDiasComponent implements OnInit {
     public currentDate: Moment;
     public diasDaSemana: Array<DiaDaSemana> = [];
     public indexDaSemana: number = 0;
@@ -91,37 +89,5 @@ export class DailyComponent implements OnInit {
             case 6:
                 return "Sábado";
         }
-    }
-
-    public alterarTarefaCompleta(_registro: Registro)
-    {
-        _registro.tarefaCompleta = !_registro.tarefaCompleta;
-    }
-
-    public editarDescricao(_registro: Registro)
-    {
-        _registro.editando = true;
-        _registro.novaDescricao = _registro.descricao;
-    }
-
-    public salvarEdicao(_registro: Registro)
-    {
-        _registro.editando = false;
-
-        if (_registro.novaDescricao)
-            _registro.descricao = _registro.novaDescricao;
-        
-        _registro.novaDescricao = "";
-    }
-
-    public cancelarEdicao(_registro: Registro)
-    {
-        _registro.editando = false;
-        _registro.novaDescricao = "";
-    }
-
-    public createTask()
-    {
-        moment()
     }
 }

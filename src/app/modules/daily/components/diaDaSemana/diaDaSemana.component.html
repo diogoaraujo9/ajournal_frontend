@@ -1,0 +1,15 @@
+<div class="dia-da-semana-container"> 
+    <div class="dia-da-semana">
+        {{dia.dia}}.{{dia.mes}}.{{dia.ano}} {{dia.diaDaSemana}}
+    </div>
+
+    <ng-container *ngFor="let registro of dia.registros">
+        <registro [registro]="registro">
+        </registro>
+    </ng-container>
+
+    <div (click)="iniciarAdicionarRegistro(dia)" class="adicionar-button">
+        <i class="fas fa-plus"></i>
+        <span>Novo registro</span>
+    </div>
+</div>

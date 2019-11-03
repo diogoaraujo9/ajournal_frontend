@@ -1,9 +1,9 @@
 import { Routes, RouterModule } from "@angular/router";
-import { DailyComponent } from "./components/listagemDias/listagemDias.component";
+import { ListagemDeDiasComponent } from "./components/listagemDias/listagemDias.component";
 
 const routes_paths: Routes = 
 [
-    { path: '', component: DailyComponent }
+    { path: '', component: ListagemDeDiasComponent }
 ];
 
 export const DailyRouting = RouterModule.forChild(routes_paths);
