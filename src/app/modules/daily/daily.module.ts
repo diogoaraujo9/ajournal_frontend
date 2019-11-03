@@ -10,7 +10,8 @@ import { TaskService } from './service/task.service';
         DailyComponent
     ],
     imports: [
-        DailyRouting
+        DailyRouting,
+        CommonModule
     ],
     providers: [
         TaskService

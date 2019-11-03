@@ -1,5 +1,29 @@
-<div>
-  Daily
-</div>
+<div class="card-container">
+    <div class="dia-da-semana-container" *ngFor="let dia of diasDaSemana"> 
+        <div class="dia-da-semana">
+            {{dia.dia}}.{{dia.mes}}.{{dia.ano}} {{dia.diaDaSemana}}
+        </div>
 
-<button (click)="createTask()">A</button>
+        <div class="registros-container" *ngFor="let registro of dia.registros">
+            <div class="registro-icone">
+                <i *ngIf="registro.tipo == 'Tarefa' && registro.tarefaCompleta" 
+                    (click)="alterarTarefaCompleta(registro)"
+                    class="icone-selecionavel far fa-circle">
+                </i>
+                <i *ngIf="registro.tipo == 'Tarefa' && !registro.tarefaCompleta" 
+                    (click)="alterarTarefaCompleta(registro)"
+                    class="icone-selecionavel far fa-check-circle">
+                </i>
+                <i *ngIf="registro.tipo == 'Evento'" class="far fa-calendar"></i>
+                <i *ngIf="registro.tipo == 'Nota'" class="far fa-bookmark"></i>
+            </div>
+            <span class="registro-descricao">
+                {{registro.descricao}}
+            </span>
+        </div>
+
+        <div class="icone-container">
+            <i class="far fa-plus-square"></i>
+        </div>
+    </div>
+</div>

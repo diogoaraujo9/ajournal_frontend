@@ -1,4 +1,51 @@
+@import 'styles/colors.scss';
+
 body {
     margin: 0;
     padding: 0;
+}
+
+.card-container {
+    background-color: #fff;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+*::-webkit-scrollbar-track
+{
+	background-color: #F5F5F5;
+	border-radius: 10px;
+}
+
+*::-webkit-scrollbar
+{
+	width: 10px;
+    background-color: #F5F5F5;
+    width: 6px;
+}
+
+*::-webkit-scrollbar-thumb
+{
+    border-radius: 10px;
+    background-color: $type-gray;
+}
+
+@font-face {
+    font-family: Kalam;
+    src: url("./assets/fonts/Kalam-Regular.ttf"); 
+}
+
+@font-face {
+    font-family: Chilanka;
+    src: url("./assets/fonts/Chilanka-Regular.ttf");
+}
+
+@font-face {
+    font-family: 'Short Stack';
+    src: url("./assets/fonts/ShortStack-Regular.ttf");
+}
+
+@font-face {
+    font-family: 'Noto Sans';
+    src: url("./assets/fonts/NotoSans-Regular.ttf");
 }
