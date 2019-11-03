@@ -1,0 +1,63 @@
+@import '../../../../../styles/colors.scss';
+
+.dia-da-semana-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 12px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    background-color: #fff;
+
+    .dia-da-semana {
+        font-size: 16px;
+        font-family: 'Short Stack'; 
+        min-height: 40px;
+        display: flex;
+        align-items: center;
+    }
+
+    .adicionar-button {
+        color: $type-gray;
+        background-color: $white;
+        margin-left: 20px;
+        padding: 8px 5px;
+        border-radius: 5px;
+        width: 140px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "Noto Sans";
+        border: 1px solid $border-gray;
+        cursor: pointer;
+        margin-top: 5px;
+
+        i {
+            color: $icon-background;
+            font-size: 12px;
+            margin-right: 6px;
+        }
+
+        span {
+            font-size: 12px;
+            line-height: 12px;
+        }
+
+        &:hover {
+            color: $primary;
+            background-color: $light-blue;
+            border: 1px solid transparent;
+
+            i {
+                color: $primary;
+            }
+        }
+    }
+
+    &:hover {
+        // background-color: #ecf0f7;
+        color:  $primary;
+        box-shadow:  0px 0px 5px $primary;
+    }
+}
+

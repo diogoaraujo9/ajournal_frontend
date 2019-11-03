@@ -1,5 +1,5 @@
 import { Routes, RouterModule } from "@angular/router";
-import { DailyComponent } from "./components/daily.component";
+import { DailyComponent } from "./components/listagemDias/listagemDias.component";
 
 const routes_paths: Routes = 
 [

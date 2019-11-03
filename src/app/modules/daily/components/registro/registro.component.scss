@@ -1,0 +1,67 @@
+@import '../../../../../styles/colors.scss';
+
+.registros-container {
+    padding: 0px 0px 10px 20px;
+    display: flex;
+    font-family: "Noto Sans";
+
+    .registro-descricao {
+        cursor: pointer;
+        color: $type-gray;
+        // font-family: "Noto Sans";
+        font-size: 14px;
+        flex-grow: 1;
+
+        &:hover {
+            color: $primary;
+        }
+    }
+
+    .registro-descricao-input {
+        flex-grow: 1;
+        margin-right: 10px;
+        border: 0;
+        border-bottom: 1px solid $primary;
+        color: $type-gray;
+        font-family: "Noto Sans";
+        font-size: 14px;
+        outline: none;
+    }
+
+    .registro-icone {
+        color: $type-gray;
+        height: 100%;
+        width: 20px;
+        min-width: 20px;
+        margin-right: 5px;
+        margin-top: 1px;
+
+        .icone-selecionavel {
+            cursor: pointer;
+            
+            &:hover {
+                color: $primary;
+            }
+
+            &:active {
+                color: $primary-active;
+            }
+        }
+    }
+
+    .registro-icones-confirmacao {
+        color: $type-gray;
+
+        i:first-child {
+            margin-right: 6px;
+        }
+
+        .icone-confirmacao:hover {
+            color: #00CA00;
+        }
+
+        .icone-cancelar:hover {
+            color: #FF8A89;
+        }
+    }
+}
