@@ -24,7 +24,7 @@ export class CoreHttpService {
 
     public get urlAPI()
     {
-        return isDevMode() ? "http://localhost:1337" : "http://ajournal.azurewebsites.net";
+        return isDevMode() ? "http://localhost:1337" : "https://ajournal.azurewebsites.net";
     }
 
     private extractData(res: Response) {
