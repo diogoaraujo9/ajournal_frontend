@@ -35,37 +35,35 @@ export class ListagemDeDiasComponent implements OnInit {
                 ano: diaAtual.year(),
                 dia: diaAtual.date(),
                 mes: diaAtual.month(),
+                data: diaAtual.toDate(),
                 diaDaSemana: this.decideNomeDoDiaDaSemana(diaAtual.day()),
-                registros: [
+                registros: [] 
+                /*[
                     { 
-                        diaDoRegistro: null,
+                        diaDoRegistro: diaAtual.toDate(),
                         tipo: TipoDeRegistro.Tarefa,
                         descricao: "Comprar chumbinho no Joanin",
-                        tarefaCompleta: true,
-                        editando: false
+                        tarefaCompleta: true
                     },
                     { 
-                        diaDoRegistro: null,
+                        diaDoRegistro: diaAtual.toDate(),
                         tipo: TipoDeRegistro.Tarefa,
                         descricao: "Matar o cachorro da vizinha",
-                        tarefaCompleta: false,
-                        editando: false
+                        tarefaCompleta: false
                     },
                     { 
-                        diaDoRegistro: null,
+                        diaDoRegistro: diaAtual.toDate(),
                         tipo: TipoDeRegistro.Evento,
                         descricao: "Baladinha indie na augusta",
-                        tarefaCompleta: false,
-                        editando: false
+                        tarefaCompleta: false
                     },
                     { 
-                        diaDoRegistro: null,
+                        diaDoRegistro: diaAtual.toDate(),
                         tipo: TipoDeRegistro.Nota,
                         descricao: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec scelerisque quam, sed imperdiet justo. Vestibulum nec vulputate sapien. Aliquam ac vulputate nulla. Integer a magna efficitur, dictum nisl at, posuere ligula. Integer tortor nisl, aliquam vel turpis a, egestas semper justo. Integer at nunc et ante semper sollicitudin. Sed ut felis eu eros facilisis elementum. Suspendisse diam neque, ullamcorper vitae nisl at, lobortis posuere mauris. Donec interdum quam ac eros mattis sagittis. Morbi eu massa consectetur purus porta pharetra.",
-                        tarefaCompleta: false,
-                        editando: false
+                        tarefaCompleta: false
                     }
-                ]
+                ]*/
             });
         });
     }

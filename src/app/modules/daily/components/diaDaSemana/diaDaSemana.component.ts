@@ -14,11 +14,45 @@ import { Registro } from '../../model/registro.model';
 })
 export class DiaDaSemanaComponent implements OnInit {
     @Input() dia: DiaDaSemana;
+    public adicionandoRegistro: boolean = false;
+
+    public editandoNovoRegistro: boolean = false;
+    public novoRegistro: Registro;
     
     constructor(public taskService: TaskService)
     {
     }
 
     ngOnInit(): void {
+    }
+
+    public iniciarAdicionarRegistro()
+    {
+        this.adicionandoRegistro = true;
+    }
+
+    public iniciarEdicaoNovoRegistro(_tipoRegistro: TipoDeRegistro)
+    {
+        this.editandoNovoRegistro = true;
+        this.adicionandoRegistro = false;
+        this.novoRegistro = {
+            diaDoRegistro: this.dia.data,
+            tipo: _tipoRegistro,
+            tarefaCompleta: false,
+            descricao: ""
+        };
+    }
+
+    public concluirNovoRegistro(_registro: Registro, _salvar: boolean)
+    {
+        this.editandoNovoRegistro = false;
+        this.adicionandoRegistro = false;
+        this.novoRegistro = null;
+
+        if (_salvar)
+        {
+            _registro.tarefaCompleta = false;
+            this.dia.registros.push(_registro);
+        }
     }
 }

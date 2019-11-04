@@ -6,6 +6,4 @@ export class Registro
     public tipo?: TipoDeRegistro;
     public tarefaCompleta?: boolean; 
     public descricao?: string;
-    public editando?: boolean;
-    public novaDescricao?: string;
 }

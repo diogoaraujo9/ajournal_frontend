@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { TaskService } from '../../service/task.service';
 import { Registro } from '../../model/registro.model';
 
@@ -8,7 +8,12 @@ import { Registro } from '../../model/registro.model';
     styleUrls: ['./registro.component.scss']
 })
 export class RegistroComponent implements OnInit {
-    @Input() registro: Registro;
+    @Input() registro: Registro;    
+    @Input() criandoNovo: boolean = false;
+    @Input() editando: boolean = false;
+    @Output() completouNovoRegistro: EventEmitter<Registro> = new EventEmitter<Registro>();
+    @Output() cancelouNovoRegistro: EventEmitter<any> = new EventEmitter<any>();
+    public novaDescricao: string = "";
     
     constructor(public taskService: TaskService)
     {
@@ -18,30 +23,41 @@ export class RegistroComponent implements OnInit {
         
     }  
 
-    public alterarTarefaCompleta(_registro: Registro)
+    public alterarTarefaCompleta()
     {
-        _registro.tarefaCompleta = !_registro.tarefaCompleta;
+        if (!this.editando)
+            this.registro.tarefaCompleta = !this.registro.tarefaCompleta;
     }
 
-    public editarDescricao(_registro: Registro)
+    public editarDescricao()
     {
-        _registro.editando = true;
-        _registro.novaDescricao = _registro.descricao;
+        this.editando = true;
+        this.novaDescricao = this.registro.descricao;
     }
 
-    public salvarEdicao(_registro: Registro)
+    public salvarEdicao()
     {
-        _registro.editando = false;
+        this.editando = false;
 
-        if (_registro.novaDescricao)
-            _registro.descricao = _registro.novaDescricao;
+        if (this.novaDescricao)
+            this.registro.descricao = this.novaDescricao;
         
-        _registro.novaDescricao = "";
+        this.novaDescricao = "";
+
+        if (this.criandoNovo)
+        {
+            this.completouNovoRegistro.next(this.registro);
+        }
     }
 
-    public cancelarEdicao(_registro: Registro)
+    public cancelarEdicao()
     {
-        _registro.editando = false;
-        _registro.novaDescricao = "";
+        this.editando = false;
+        this.novaDescricao = "";
+
+        if (this.criandoNovo)
+        {
+            this.cancelouNovoRegistro.next();
+        }
     }
 }

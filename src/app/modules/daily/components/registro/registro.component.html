@@ -1,28 +1,28 @@
 <div class="registros-container">
     <div class="registro-icone">
-        <i *ngIf="registro.tipo == 'Tarefa' && registro.tarefaCompleta" 
-            (click)="alterarTarefaCompleta(registro)"
+        <i *ngIf="registro.tipo == 'Tarefa' && !registro.tarefaCompleta" 
+            (click)="alterarTarefaCompleta()"
             class="icone-selecionavel far fa-circle">
         </i>
-        <i *ngIf="registro.tipo == 'Tarefa' && !registro.tarefaCompleta" 
-            (click)="alterarTarefaCompleta(registro)"
+        <i *ngIf="registro.tipo == 'Tarefa' && registro.tarefaCompleta" 
+            (click)="alterarTarefaCompleta()"
             class="icone-selecionavel far fa-check-circle">
         </i>
         <i *ngIf="registro.tipo == 'Evento'" class="far fa-calendar"></i>
         <i *ngIf="registro.tipo == 'Nota'" class="far fa-bookmark"></i>
     </div>
 
-    <div (click)="editarDescricao(registro)" *ngIf="!registro.editando" class="registro-descricao">
+    <div (click)="editarDescricao()" *ngIf="!editando" class="registro-descricao">
         {{registro.descricao}}
     </div>
 
-    <input *ngIf="registro.editando" 
-        (keyup.enter)="salvarEdicao(registro)"
+    <input *ngIf="editando" 
+        (keyup.enter)="salvarEdicao()"
         class="registro-descricao-input"
-        [(ngModel)]="registro.novaDescricao">
+        [(ngModel)]="novaDescricao">
 
-    <div class="registro-icones-confirmacao" *ngIf="registro.editando">
-        <i (click)="salvarEdicao(registro)" class="icone-confirmacao far fa-check-circle"></i>
-        <i (click)="cancelarEdicao(registro)" class="icone-cancelar far fa-times-circle"></i>
+    <div class="registro-icones-confirmacao" *ngIf="editando">
+        <i (click)="salvarEdicao()" class="icone-confirmacao far fa-check-circle"></i>
+        <i (click)="cancelarEdicao()" class="icone-cancelar far fa-times-circle"></i>
     </div>
 </div>
