@@ -8,21 +8,21 @@
         </registro>
     </ng-container>
 
-    <div *ngIf="!adicionandoRegistro && !editandoNovoRegistro" (click)="iniciarAdicionarRegistro()" class="adicionar-button">
+    <div *ngIf="!adicionandoRegistro && !editandoNovoRegistro" (click)="iniciarAdicionarRegistro()" class="botao-primario">
         <i class="fas fa-plus"></i>
         <span>Novo registro</span>
     </div>
 
     <div class="tipos-container" *ngIf="adicionandoRegistro">
-        <div (click)="iniciarEdicaoNovoRegistro('Tarefa')" class="adicionar-button">
+        <div (click)="iniciarEdicaoNovoRegistro('Tarefa')" class="botao-primario">
             <i class="far fa-check-circle"></i>
             <span>Tarefa</span>
         </div>
-        <div (click)="iniciarEdicaoNovoRegistro('Nota')" class="adicionar-button">
+        <div (click)="iniciarEdicaoNovoRegistro('Nota')" class="botao-primario">
             <i class="far fa-bookmark"></i>
             <span>Nota</span>
         </div>
-        <div (click)="iniciarEdicaoNovoRegistro('Evento')" class="adicionar-button">
+        <div (click)="iniciarEdicaoNovoRegistro('Evento')" class="botao-primario">
             <i class="far fa-calendar"></i>
             <span>Evento</span>
         </div>

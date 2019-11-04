@@ -1,15 +1,16 @@
 <div class="registros-container">
     <div class="registro-icone">
-        <i *ngIf="registro.tipo == 'Tarefa' && !registro.tarefaCompleta" 
+        <i *ngIf="!salvando && registro.tipo == 'Tarefa' && !registro.tarefaCompleta" 
             (click)="alterarTarefaCompleta()"
             class="icone-selecionavel far fa-circle">
         </i>
-        <i *ngIf="registro.tipo == 'Tarefa' && registro.tarefaCompleta" 
+        <i *ngIf="!salvando && registro.tipo == 'Tarefa' && registro.tarefaCompleta" 
             (click)="alterarTarefaCompleta()"
             class="icone-selecionavel far fa-check-circle">
         </i>
-        <i *ngIf="registro.tipo == 'Evento'" class="far fa-calendar"></i>
-        <i *ngIf="registro.tipo == 'Nota'" class="far fa-bookmark"></i>
+        <i *ngIf="!salvando && registro.tipo == 'Evento'" class="far fa-calendar"></i>
+        <i *ngIf="!salvando && registro.tipo == 'Nota'" class="far fa-bookmark"></i>
+        <i *ngIf="salvando" class="fas fa-spinner fa-spin"></i>
     </div>
 
     <div (click)="editarDescricao()" *ngIf="!editando" class="registro-descricao">

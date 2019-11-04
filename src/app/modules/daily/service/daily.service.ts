@@ -5,9 +5,10 @@ import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { Task } from '../model/task.model';
 import { CoreHttpService } from 'src/app/coreHttp.service';
+import { Registro } from '../model/registro.model';
 
 @Injectable()
-export class TaskService {
+export class DailyService {
     private headers = new Headers();
     
     constructor(private http : Http,
@@ -16,11 +17,20 @@ export class TaskService {
         this.headers.set('Content-Type', 'application/json');
     }
 
-    public saveTask(task: Task): Observable<any>
+    public criarRegistro(_registro: Registro): Observable<any>
     {
         let options = new RequestOptions( { headers : this.headers });
 
-        return this.http.post(`${this._coreHttpService.urlAPI}/api/create`, task, options)
+        return this.http.post(`${this._coreHttpService.urlAPI}/api/createDailyLog`, _registro, options)
+        .pipe(map(this.extractData))
+        .pipe(catchError(this.handleError));
+    }
+
+    public buscarWeeklyLogs(_data: {data: Date}): Observable<any>
+    {
+        let options = new RequestOptions( { headers : this.headers });
+
+        return this.http.post(`${this._coreHttpService.urlAPI}/api/getDailyWeek`, _data, options)
         .pipe(map(this.extractData))
         .pipe(catchError(this.handleError));
     }

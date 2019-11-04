@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DailyRouting } from './daily-routing.module';
 import { ListagemDeDiasComponent } from './components/listagemDias/listagemDias.component';
-import { TaskService } from './service/task.service';
+import { DailyService } from './service/daily.service';
 import { FormsModule } from '@angular/forms';
 import { RegistroComponent } from './components/registro/registro.component';
 import { DiaDaSemanaComponent } from './components/diaDaSemana/diaDaSemana.component';
@@ -20,7 +20,7 @@ import { DiaDaSemanaComponent } from './components/diaDaSemana/diaDaSemana.compo
         FormsModule
     ],
     providers: [
-        TaskService
+        DailyService
     ],
     bootstrap: []
 })

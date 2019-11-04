@@ -8,6 +8,21 @@ import { HttpModule } from '@angular/http';
 import { LateralMenuComponent } from './components/lateral-menu/lateral-menu.component';
 import { TopMenuComponent } from './components/top-menu/top-menu.component';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { NotifierModule, NotifierOptions } from "angular-notifier";
+
+const customNotifierOptions: NotifierOptions = {
+  position: {
+		horizontal: {
+			position: 'right',
+			distance: 12
+		},
+		vertical: {
+			position: 'bottom',
+			distance: 12,
+			gap: 10
+		}
+  }
+}
 
 @NgModule({
   declarations: [
@@ -19,7 +34,8 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    HttpModule
+    HttpModule,
+    NotifierModule.withConfig(customNotifierOptions)
   ],
   providers: [
     CoreHttpService,

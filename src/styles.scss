@@ -1,4 +1,5 @@
 @import 'styles/colors.scss';
+@import '../node_modules/angular-notifier/styles.scss';
 
 body {
     margin: 0;
@@ -9,6 +10,43 @@ body {
     background-color: #fff;
     border-radius: 5px;
     overflow: hidden;
+}
+
+.botao-primario {
+    color: $type-gray;
+    background-color: $white;
+    margin-left: 20px;
+    padding: 8px 5px;
+    border-radius: 5px;
+    width: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Noto Sans";
+    border: 1px solid $border-gray;
+    cursor: pointer;
+    margin-top: 5px;
+
+    i {
+        color: $icon-background;
+        font-size: 12px;
+        margin-right: 6px;
+    }
+
+    span {
+        font-size: 12px;
+        line-height: 12px;
+    }
+
+    &:hover {
+        color: $primary;
+        background-color: $light-blue;
+        border: 1px solid transparent;
+
+        i {
+            color: $primary;
+        }
+    }
 }
 
 *::-webkit-scrollbar-track
@@ -48,4 +86,8 @@ body {
 @font-face {
     font-family: 'Noto Sans';
     src: url("./assets/fonts/NotoSans-Regular.ttf");
+}
+
+.notifier__notification-message {
+    font-family: 'Noto Sans';
 }

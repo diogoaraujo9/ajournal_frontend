@@ -1,70 +1,70 @@
-import { Component, OnInit } from '@angular/core';
-import { TaskService } from '../../service/task.service';
-import * as moment from 'moment';
-import { Moment } from 'moment';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { DailyService } from '../../service/daily.service';
+import * as moment from 'moment-timezone';
 import { DiaDaSemana } from '../../model/diaDaSemana.model';
-import { TipoDeRegistro } from '../../enum/tipoDeRegistro.enum';
+import { Registro } from '../../model/registro.model';
+import { NotifierService } from 'angular-notifier';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'listagem-de-dias',
     templateUrl: './listagemDias.component.html',
     styleUrls: ['./listagemDias.component.scss']
 })
-export class ListagemDeDiasComponent implements OnInit {
-    public currentDate: Moment;
+export class ListagemDeDiasComponent implements OnInit, OnDestroy {
     public diasDaSemana: Array<DiaDaSemana> = [];
     public indexDaSemana: number = 0;
+    public buscarWeeklyLogsSubscription: Subscription;
     
-    constructor(public taskService: TaskService)
+    constructor(public dailyService: DailyService,
+        public notifierService: NotifierService)
     {
     }
 
     ngOnInit(): void {
-        this.currentDate = moment();        
-        this.preencheDiasDaSemana();
+        this.buscarWeeklyLogsSubscription = this.dailyService.buscarWeeklyLogs({data: moment().day(0).toDate()}).subscribe(resp => {
+            this.preencheDiasDaSemana(resp || []);
+        }, err => {
+            console.error(err);
+            this.notifierService.notify("error", "Um erro ocorreu ao tentar buscar registros");
+        });
     }
 
-    public preencheDiasDaSemana()
+    ngOnDestroy(): void {
+        this.buscarWeeklyLogsSubscription.unsubscribe();
+    }
+
+    public preencheDiasDaSemana(_registros: Array<Registro>)
     {
         this.diasDaSemana = [];
         const listaDeDias = Array.from(Array(7).keys()); 
+        let timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
         
         listaDeDias.forEach(dia => {
-            const diaAtual = moment().day(this.indexDaSemana + dia);
-            this.diasDaSemana.push({
+            const diaAtual = moment().tz(timezone).day(this.indexDaSemana + dia);
+
+            let novoDiaDaSemana: DiaDaSemana = {
                 ano: diaAtual.year(),
                 dia: diaAtual.date(),
                 mes: diaAtual.month(),
                 data: diaAtual.toDate(),
                 diaDaSemana: this.decideNomeDoDiaDaSemana(diaAtual.day()),
-                registros: [] 
-                /*[
-                    { 
-                        diaDoRegistro: diaAtual.toDate(),
-                        tipo: TipoDeRegistro.Tarefa,
-                        descricao: "Comprar chumbinho no Joanin",
-                        tarefaCompleta: true
-                    },
-                    { 
-                        diaDoRegistro: diaAtual.toDate(),
-                        tipo: TipoDeRegistro.Tarefa,
-                        descricao: "Matar o cachorro da vizinha",
-                        tarefaCompleta: false
-                    },
-                    { 
-                        diaDoRegistro: diaAtual.toDate(),
-                        tipo: TipoDeRegistro.Evento,
-                        descricao: "Baladinha indie na augusta",
-                        tarefaCompleta: false
-                    },
-                    { 
-                        diaDoRegistro: diaAtual.toDate(),
-                        tipo: TipoDeRegistro.Nota,
-                        descricao: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec scelerisque quam, sed imperdiet justo. Vestibulum nec vulputate sapien. Aliquam ac vulputate nulla. Integer a magna efficitur, dictum nisl at, posuere ligula. Integer tortor nisl, aliquam vel turpis a, egestas semper justo. Integer at nunc et ante semper sollicitudin. Sed ut felis eu eros facilisis elementum. Suspendisse diam neque, ullamcorper vitae nisl at, lobortis posuere mauris. Donec interdum quam ac eros mattis sagittis. Morbi eu massa consectetur purus porta pharetra.",
-                        tarefaCompleta: false
-                    }
-                ]*/
+                registros: []
+            }
+
+            _registros.forEach(registro => {
+                var format = 'YYYY/MM/DD HH:mm:ss ZZ';
+                const dataConvertidaParaTimezoneAtual =  moment(registro.data, format).tz(timezone);
+
+                if (novoDiaDaSemana.dia == dataConvertidaParaTimezoneAtual.date() && 
+                    novoDiaDaSemana.mes == dataConvertidaParaTimezoneAtual.month() &&
+                    novoDiaDaSemana.ano == dataConvertidaParaTimezoneAtual.year())
+                {
+                    novoDiaDaSemana.registros.push(registro);
+                }
             });
+
+            this.diasDaSemana.push(novoDiaDaSemana);
         });
     }
 

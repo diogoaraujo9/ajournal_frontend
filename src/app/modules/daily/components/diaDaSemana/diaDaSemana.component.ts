@@ -1,8 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { TaskService } from '../../service/task.service';
-import { Task } from '../../model/task.model';
-import * as moment from 'moment';
-import { Moment } from 'moment';
+import { DailyService } from '../../service/daily.service';
 import { DiaDaSemana } from '../../model/diaDaSemana.model';
 import { TipoDeRegistro } from '../../enum/tipoDeRegistro.enum';
 import { Registro } from '../../model/registro.model';
@@ -18,8 +15,9 @@ export class DiaDaSemanaComponent implements OnInit {
 
     public editandoNovoRegistro: boolean = false;
     public novoRegistro: Registro;
+    public isLoading: boolean = false;
     
-    constructor(public taskService: TaskService)
+    constructor(public dailyService: DailyService)
     {
     }
 
@@ -36,7 +34,7 @@ export class DiaDaSemanaComponent implements OnInit {
         this.editandoNovoRegistro = true;
         this.adicionandoRegistro = false;
         this.novoRegistro = {
-            diaDoRegistro: this.dia.data,
+            data: this.dia.data,
             tipo: _tipoRegistro,
             tarefaCompleta: false,
             descricao: ""
