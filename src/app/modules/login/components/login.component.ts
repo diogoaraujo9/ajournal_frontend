@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { LoginService } from '../service/login.service';
 import { Login } from '../model/login.model';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'journal-daily',
@@ -8,22 +9,25 @@ import { Login } from '../model/login.model';
     styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-    constructor(public loginService: LoginService)
+    public user: Login = new Login();
+    
+    constructor(public loginService: LoginService, public router: Router)
     {
     }
 
     public doLogin()
     {
-        debugger;
-        let loginExample: Login = {
-            usuario: "TESTE",
-            senha: "senha123"
-        };
+        event.preventDefault();
 
-        this.loginService.doLogin(loginExample).subscribe(x => {
-            debugger;
+        if (!this.user || !this.user.usuario || !this.user.senha)
+        {
+            return;
+        }
+
+        this.loginService.doLogin(this.user).subscribe(x => {
+            this.router.navigate(["daily"]);
         }, err => {
-            debugger;
+            console.error(err);
         });
     }
 }

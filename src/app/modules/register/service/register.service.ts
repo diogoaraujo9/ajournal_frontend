@@ -20,7 +20,7 @@ export class RegisterService {
     {
         let options = new RequestOptions( { headers : this.headers });
 
-        return this.http.post(`${this._coreHttpService.urlAPI}/api/register`, register, options)
+        return this.http.post(`${this._coreHttpService.urlAPI}/api/createUser`, register, options)
         .pipe(map(this.extractData))
         .pipe(catchError(this.handleError));
     }

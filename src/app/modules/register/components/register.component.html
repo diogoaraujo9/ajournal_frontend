@@ -1,10 +1,10 @@
 <div class="login-page">
   <div class="form">
     <form class="login-form">
-      <input type="text" placeholder="name"/>
-      <input type="text" placeholder="username"/>
-      <input type="password" placeholder="password"/>
-      <button>Create Free Account</button>
+      <input [(ngModel)]="newUser.nome" name="nome" type="text" placeholder="name"/>
+      <input [(ngModel)]="newUser.usuario" name="usuario" type="text" placeholder="username"/>
+      <input [(ngModel)]="newUser.senha" name="password" type="password" placeholder="password"/>
+      <button (click)="createRegister()">Create Free Account</button>
       <p class="message">Already registered? <a routerLink="/login">Sing in</a></p>
     </form>
   </div>

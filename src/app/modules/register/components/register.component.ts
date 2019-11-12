@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RegisterService } from '../service/register.service';
 import { Register } from '../model/register.model';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'journal-daily',
@@ -8,23 +9,24 @@ import { Register } from '../model/register.model';
     styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent {
-    constructor(public registerService: RegisterService)
+    public newUser: Register = new Register();
+
+    constructor(public registerService: RegisterService,
+        public router: Router)
     {
     }
 
     public createRegister()
     {
-        debugger;
-        let registerExample: Register = {
-            nome: "TESTE",
-            usuario: "teste",
-            senha: "teste123"
-        };
+        if (!this.newUser || !this.newUser.nome || !this.newUser.senha || !this.newUser.usuario)
+        {
+            return;
+        }
 
-        this.registerService.saveRegister(registerExample).subscribe(x => {
-            debugger;
+        this.registerService.saveRegister(this.newUser).subscribe(x => {
+            this.router.navigate(["login"]);
         }, err => {
-            debugger;
+            console.error(err);
         });
     }
 }

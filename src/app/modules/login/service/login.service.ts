@@ -18,10 +18,9 @@ export class LoginService {
 
     public doLogin(login: Login): Observable<any>
     {
-        debugger;
         let options = new RequestOptions( { headers : this.headers });
 
-        return this.http.post(`${this._coreHttpService.urlAPI}/api/login`, login, options)
+        return this.http.post(`${this._coreHttpService.urlAPI}/api/authenticateUser`, login, options)
         .pipe(map(this.extractData))
         .pipe(catchError(this.handleError));
     }
