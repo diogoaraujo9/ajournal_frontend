@@ -20,7 +20,6 @@ import { DiaDaSemanaComponent } from './components/diaDaSemana/diaDaSemana.compo
         FormsModule
     ],
     providers: [
-        DailyService
     ],
     bootstrap: []
 })

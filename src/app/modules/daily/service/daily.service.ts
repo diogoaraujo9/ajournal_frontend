@@ -6,12 +6,13 @@ import { map, catchError } from 'rxjs/operators';
 import { Task } from '../model/task.model';
 import { CoreHttpService } from 'src/app/coreHttp.service';
 import { Registro } from '../model/registro.model';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class DailyService {
     private headers = new Headers();
     
-    constructor(private http : Http,
+    constructor(private http : HttpClient,
         public _coreHttpService: CoreHttpService) 
     {
         this.headers.set('Content-Type', 'application/json');
@@ -21,7 +22,7 @@ export class DailyService {
     {
         let options = new RequestOptions( { headers : this.headers });
 
-        return this.http.post(`${this._coreHttpService.urlAPI}/api/createDailyLog`, _registro, options)
+        return this.http.post(`${this._coreHttpService.urlAPI}/api/createDailyLog`, _registro)
         .pipe(map(this.extractData))
         .pipe(catchError(this.handleError));
     }
@@ -30,12 +31,14 @@ export class DailyService {
     {
         let options = new RequestOptions( { headers : this.headers });
 
-        return this.http.post(`${this._coreHttpService.urlAPI}/api/getDailyWeek`, _data, options)
+        return this.http.post(`${this._coreHttpService.urlAPI}/api/getDailyWeek`, _data)
         .pipe(map(this.extractData))
         .pipe(catchError(this.handleError));
     }
 
-    private extractData(res: Response) {
+    private extractData(res: any) {
+        return res;
+        
         let body = res && res.json();
         return body || {};
     }

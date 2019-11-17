@@ -18,7 +18,6 @@ import { FormsModule } from '@angular/forms';
         FormsModule
     ],
     providers: [
-        LoginService
     ],
     bootstrap: []
 })
