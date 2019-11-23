@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -34,33 +34,33 @@ const customNotifierOptions: NotifierOptions = {
 }
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LateralMenuComponent,
-    TopMenuComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    HttpModule,
-    NotifierModule.withConfig(customNotifierOptions),
-    JwtModule.forRoot({
-      config: {
-        tokenGetter: tokenGetter,
-        whitelistedDomains: ['localhost:1337'],
-        blacklistedRoutes: ['localhost:1337/api/authenticateUser']
-      }
-    })
-  ],
-  providers: [
-    CoreHttpService,
-    AuthGuard,
-    RegisterService,
-    LoginService,
-    DailyService,
-    {provide: LocationStrategy, useClass: HashLocationStrategy}
-  ], 
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        LateralMenuComponent,
+        TopMenuComponent
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        HttpModule,
+        NotifierModule.withConfig(customNotifierOptions),
+        JwtModule.forRoot({
+            config: {
+                tokenGetter: tokenGetter,
+                whitelistedDomains: [isDevMode() ? "localhost:1337" : "ajournal.azurewebsites.net"],
+                blacklistedRoutes: [isDevMode() ? "localhost:1337/api/authenticateUser" : "ajournal.azurewebsites.net/api/authenticateUser"]
+            }
+        })
+    ],
+    providers: [
+      CoreHttpService,
+      AuthGuard,
+      RegisterService,
+      LoginService,
+      DailyService,
+      {provide: LocationStrategy, useClass: HashLocationStrategy}
+    ], 
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

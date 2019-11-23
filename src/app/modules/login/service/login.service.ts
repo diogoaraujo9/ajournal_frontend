@@ -1,7 +1,7 @@
 import 'rxjs/Rx';
 import { Http, Response, Headers, RequestOptions, ResponseContentType } from '@angular/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subscription, Subject } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { Login } from '../model/login.model';
 import { CoreHttpService } from 'src/app/coreHttp.service';
@@ -10,6 +10,7 @@ import { HttpClient } from '@angular/common/http';
 @Injectable()
 export class LoginService {
     private headers = new Headers();
+    public changedLoggedInSubject = new Subject<boolean>();
     
     constructor(private http : HttpClient,
         public _coreHttpService: CoreHttpService) 
@@ -23,12 +24,8 @@ export class LoginService {
 
         return this.http.post<{token: string, userId: string}>(`${this._coreHttpService.urlAPI}/api/authenticateUser`, login)
         .pipe(map(resp => {
-            // const body = this.extractData(resp);
-
-            // if (body)
-            // {
-                localStorage.setItem('access_token', resp.token);
-            // }
+            localStorage.setItem('access_token', resp.token);
+            this.changedLoggedInSubject.next(true);
 
             return resp;
         }))
@@ -37,6 +34,8 @@ export class LoginService {
 
     logout() {
         localStorage.removeItem('access_token');
+
+        this.changedLoggedInSubject.next(false);
     }
     
     public get loggedIn(): boolean {
