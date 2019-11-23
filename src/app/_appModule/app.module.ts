@@ -52,11 +52,30 @@ const customNotifierOptions: NotifierOptions = {
         //         blacklistedRoutes: ["localhost:1337/api/authenticateUser"]
         //     }
         // })
+        // JwtModule.forRoot({
+        //     config: {
+        //         tokenGetter: tokenGetter,
+        //         whitelistedDomains: [new RegExp('^(.+)$')],
+        //         blacklistedRoutes: [new RegExp('^(.+\/api\/authenticateUser)$')]
+        //     }
+        // })
         JwtModule.forRoot({
             config: {
                 tokenGetter: tokenGetter,
-                whitelistedDomains: [new RegExp('^(.+)$')],
-                blacklistedRoutes: [new RegExp('^(.+\/api\/authenticateUser)$')]
+                whitelistedDomains: [
+                    "ajournal.azurewebsites.net",
+                    "http://ajournal.azurewebsites.net",
+                    "https://ajournal.azurewebsites.net",
+                    "localhost:1337",
+                    new RegExp('^(.+)$')
+                ],
+                blacklistedRoutes: [
+                    "ajournal.azurewebsites.net/api/authenticateUser",
+                    "http://ajournal.azurewebsites.net/api/authenticateUser",
+                    "https://ajournal.azurewebsites.net/api/authenticateUser",
+                    "localhost:1337/api/authenticateUser",
+                    new RegExp('^(.+\/api\/authenticateUser)$')
+                ]
             }
         })
     ],
