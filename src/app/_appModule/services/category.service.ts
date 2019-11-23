@@ -1,16 +1,15 @@
 import 'rxjs/Rx';
 import { Http, Response, Headers, RequestOptions, ResponseContentType } from '@angular/http';
 import { Injectable } from '@angular/core';
-import { Observable, Subscription, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
-import { Login } from '../model/login.model';
 import { CoreHttpService } from 'src/app/coreHttp.service';
 import { HttpClient } from '@angular/common/http';
+import { CategoryColor } from '../components/category-colors/models/categoryColor';
 
 @Injectable()
-export class LoginService {
+export class CategoryService {
     private headers = new Headers();
-    public changedLoggedInSubject = new Subject<boolean>();
     
     constructor(private http : HttpClient,
         public _coreHttpService: CoreHttpService) 
@@ -18,31 +17,27 @@ export class LoginService {
         this.headers.set('Content-Type', 'application/json');
     }
 
-    public doLogin(login: Login): Observable<any>
+    public criarCategoria(_categoria: CategoryColor): Observable<CategoryColor>
     {
         let options = new RequestOptions( { headers : this.headers });
 
-        return this.http.post<{token: string, userId: string}>(`${this._coreHttpService.urlAPI}/api/authenticateUser`, login)
-        .pipe(map(resp => {
-            localStorage.setItem('access_token', resp.token);
-            this.changedLoggedInSubject.next(true);
-
-            return resp;
-        }))
+        return this.http.post(`${this._coreHttpService.urlAPI}/api/createCategoria`, _categoria)
+        .pipe(map(this.extractData))
         .pipe(catchError(this.handleError));
     }
 
-    logout() {
-        localStorage.removeItem('access_token');
+    public buscarCategorias(): Observable<Array<CategoryColor>>
+    {
+        let options = new RequestOptions( { headers : this.headers });
 
-        this.changedLoggedInSubject.next(false);
-    }
-    
-    public get loggedIn(): boolean {
-        return (localStorage.getItem('access_token') !== null);
+        return this.http.get(`${this._coreHttpService.urlAPI}/api/getCategories`)
+        .pipe(map(this.extractData))
+        .pipe(catchError(this.handleError));
     }
 
-    private extractData(res: Response) {
+    private extractData(res: any) {
+        return res;
+        
         let body = res && res.json();
         return body || {};
     }

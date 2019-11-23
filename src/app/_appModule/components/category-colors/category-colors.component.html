@@ -1,0 +1,8 @@
+<div class="category-colors-container">
+    <ng-container *ngFor="let color of colors">
+        <category-color-item [color]="color"
+            [isLoading]="isLoading"
+            [isOpen]="isOpen">
+        </category-color-item>
+    </ng-container>
+</div>

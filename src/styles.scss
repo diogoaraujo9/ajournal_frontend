@@ -91,3 +91,13 @@ body {
 .notifier__notification-message {
     font-family: 'Noto Sans';
 }
+
+.tooltip {
+    z-index: 12;
+    background-color: #616265;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-family: "Noto Sans";
+}

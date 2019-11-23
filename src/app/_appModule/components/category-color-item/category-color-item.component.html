@@ -1,0 +1,18 @@
+<div class="category-color-item" 
+    placement="right" 
+    [ngbTooltip]="color.descricao"
+    [disableTooltip]="isOpen"
+    container="body">
+    <div class="color-circle" [ngStyle]="{'background-color': color.cor}"></div>
+    <div class="color-category" *ngIf="!editando" (click)="editarDescricao()">{{isLoading ? '...' : color.descricao}}</div>
+
+    <input *ngIf="editando" 
+        (keyup.enter)="salvarEdicao()"
+        class="registro-descricao-input"
+        [(ngModel)]="novaDescricao">
+
+    <div class="registro-icones-confirmacao" *ngIf="editando">
+        <i (click)="salvarEdicao()" class="icone-confirmacao far fa-check-circle"></i>
+        <i (click)="cancelarEdicao()" class="icone-cancelar far fa-times-circle"></i>
+    </div>
+</div>

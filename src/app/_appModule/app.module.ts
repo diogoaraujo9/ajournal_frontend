@@ -12,8 +12,13 @@ import { NotifierModule, NotifierOptions } from "angular-notifier";
 import { JwtModule } from '@auth0/angular-jwt';
 import { AuthGuard } from './guard/auth.guard';
 import { RegisterService } from '../modules/register/service/register.service';
-import { LoginService } from '../modules/login/service/login.service';
+import { LoginService } from './services/login.service';
 import { DailyService } from '../modules/daily/service/daily.service';
+import { CategoryColorsComponent } from './components/category-colors/category-colors.component';
+import { CategoryColorItemComponent } from './components/category-color-item/category-color-item.component';
+import { CategoryService } from './services/category.service';
+import { FormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -37,28 +42,18 @@ const customNotifierOptions: NotifierOptions = {
     declarations: [
         AppComponent,
         LateralMenuComponent,
-        TopMenuComponent
+        TopMenuComponent,
+        CategoryColorsComponent,
+        CategoryColorItemComponent
     ],
     imports: [
         BrowserModule,
         AppRoutingModule,
         HttpClientModule,
         HttpModule,
+        FormsModule,
+        NgbModule,
         NotifierModule.withConfig(customNotifierOptions),
-        // JwtModule.forRoot({
-        //     config: {
-        //         tokenGetter: tokenGetter,
-        //         whitelistedDomains: ["localhost:1337"],
-        //         blacklistedRoutes: ["localhost:1337/api/authenticateUser"]
-        //     }
-        // })
-        // JwtModule.forRoot({
-        //     config: {
-        //         tokenGetter: tokenGetter,
-        //         whitelistedDomains: [new RegExp('^(.+)$')],
-        //         blacklistedRoutes: [new RegExp('^(.+\/api\/authenticateUser)$')]
-        //     }
-        // })
         JwtModule.forRoot({
             config: {
                 tokenGetter: tokenGetter,
@@ -85,6 +80,7 @@ const customNotifierOptions: NotifierOptions = {
       RegisterService,
       LoginService,
       DailyService,
+      CategoryService,
       {provide: LocationStrategy, useClass: HashLocationStrategy}
     ], 
     bootstrap: [AppComponent]
