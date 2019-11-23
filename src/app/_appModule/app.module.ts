@@ -45,11 +45,18 @@ const customNotifierOptions: NotifierOptions = {
         HttpClientModule,
         HttpModule,
         NotifierModule.withConfig(customNotifierOptions),
+        // JwtModule.forRoot({
+        //     config: {
+        //         tokenGetter: tokenGetter,
+        //         whitelistedDomains: ["localhost:1337"],
+        //         blacklistedRoutes: ["localhost:1337/api/authenticateUser"]
+        //     }
+        // })
         JwtModule.forRoot({
             config: {
                 tokenGetter: tokenGetter,
-                whitelistedDomains: [isDevMode() ? "localhost:1337" : "ajournal.azurewebsites.net"],
-                blacklistedRoutes: [isDevMode() ? "localhost:1337/api/authenticateUser" : "ajournal.azurewebsites.net/api/authenticateUser"]
+                whitelistedDomains: ["ajournal.azurewebsites.net"],
+                blacklistedRoutes: ["ajournal.azurewebsites.net/api/authenticateUser"]
             }
         })
     ],
