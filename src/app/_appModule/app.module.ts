@@ -55,8 +55,8 @@ const customNotifierOptions: NotifierOptions = {
         JwtModule.forRoot({
             config: {
                 tokenGetter: tokenGetter,
-                whitelistedDomains: ["ajournal.azurewebsites.net"],
-                blacklistedRoutes: ["ajournal.azurewebsites.net/api/authenticateUser"]
+                whitelistedDomains: [new RegExp('^(.+)$')],
+                blacklistedRoutes: [new RegExp('^(.+\/api\/authenticateUser)$')]
             }
         })
     ],
