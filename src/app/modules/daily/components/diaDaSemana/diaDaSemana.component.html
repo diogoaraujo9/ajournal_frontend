@@ -4,7 +4,8 @@
     </div>
 
     <ng-container *ngFor="let registro of dia.registros">
-        <registro [registro]="registro">
+        <registro [registro]="registro"
+            [ultimoDia]="ultimoDia">
         </registro>
     </ng-container>
 
@@ -31,6 +32,7 @@
         <registro [registro]="novoRegistro"
             [editando]="true"
             [criandoNovo]="true"
+            [ultimoDia]="ultimoDia"
             (completouNovoRegistro)="concluirNovoRegistro($event, true)"
             (cancelouNovoRegistro)="concluirNovoRegistro(null, false)">
         </registro>

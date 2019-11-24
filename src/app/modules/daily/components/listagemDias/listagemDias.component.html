@@ -1,4 +1,5 @@
-<ng-container *ngFor="let dia of diasDaSemana"> 
-    <dia-da-semana [dia]="dia">            
+<ng-container *ngFor="let dia of diasDaSemana; let last = last"> 
+    <dia-da-semana [dia]="dia"
+        [ultimoDia]="last">            
     </dia-da-semana>
 </ng-container>

@@ -13,6 +13,20 @@
         <i *ngIf="salvando" class="fas fa-spinner fa-spin"></i>
     </div>
 
+    <div class="color-picker-container" (mouseenter)="openColorList()" (mouseleave)="closeColorList()">
+        <div class="color-circle" 
+            [ngStyle]="{'background-color': activeColor}">
+        </div>
+        <i class="selector-icon fas fa-chevron-down"></i>
+
+        <div *ngIf="escolhendoCor" class="color-picker-list" [class.last-register]="ultimoDia">
+            <div class="color-item-container" (click)="escolherCor(color)" *ngFor="let color of colors">
+                <div class="color-item" [ngStyle]="{'background-color': color.cor}">
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div (click)="editarDescricao()" *ngIf="!editando" class="registro-descricao">
         {{registro.descricao}}
     </div>

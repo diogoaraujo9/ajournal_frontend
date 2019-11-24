@@ -11,6 +11,7 @@ import { Registro } from '../../model/registro.model';
 })
 export class DiaDaSemanaComponent implements OnInit {
     @Input() dia: DiaDaSemana;
+    @Input() ultimoDia: boolean;
     public adicionandoRegistro: boolean = false;
 
     public editandoNovoRegistro: boolean = false;

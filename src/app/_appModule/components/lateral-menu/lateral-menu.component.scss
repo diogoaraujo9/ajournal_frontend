@@ -51,6 +51,8 @@
         white-space: nowrap;
         display: flex;
         align-items: center;
+        cursor: pointer;
+        position: relative;
 
         .product-icon {
             width: 18px;
@@ -61,6 +63,15 @@
             vertical-align: top;
             padding: 15px 17px;
             cursor: pointer;
+
+            &:nth-child(2)
+            {
+                position: absolute;
+                top: 17px;
+                left: 22px;
+                background-color: #fff;
+                padding: 0;
+            }
         }
 
         .product-name {

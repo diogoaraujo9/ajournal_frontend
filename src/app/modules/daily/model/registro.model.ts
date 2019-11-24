@@ -7,4 +7,5 @@ export class Registro
     public tipo?: TipoDeRegistro;
     public tarefaCompleta?: boolean; 
     public descricao?: string;
+    public categoriaIndex?: number;
 }

@@ -64,4 +64,73 @@
             color: #FF8A89;
         }
     }
+
+    .color-picker-container {         
+        position: relative;
+        width: 32px;
+        height: 20px;
+        background-color: $hover-gray;
+        margin-right: 10px;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+
+        .color-circle {
+            width: 10px;
+            min-width: 10px;
+            height: 10px;
+            min-height: 10px;
+            border-radius: 50%;
+            margin: 5px 4px;
+        }
+
+        .selector-icon {
+            font-size: 10px;
+            line-height: 6px;
+            color: $icon-background;
+        }
+
+        .color-picker-list {
+            height: 60px;
+            min-height: 60px;
+            width: 120px;
+            min-width: 120px;
+            display: flex;
+            flex-flow: row wrap;
+            background-color: $hover-gray;
+            border-radius: 5px;
+            border: 1px solid $selector-gray;
+            position: absolute;
+            left: 0px;
+            top: 20px;
+            z-index: 20;
+
+            &.last-register {
+                bottom: 20px;
+                top: unset;
+            }
+
+            .color-item-container {
+                padding: 10px;
+                cursor: pointer;
+
+                .color-item {
+                    width: 10px;
+                    min-width: 10px;
+                    height: 10px;
+                    min-height: 10px;
+                    border-radius: 50%;
+                }
+
+                &:hover {
+                    background-color: $selector-gray;
+                }
+            }            
+        }
+
+        &:hover {
+            background-color: $selector-gray;
+        }
+    }
 }
