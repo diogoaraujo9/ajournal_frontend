@@ -15,6 +15,8 @@ export class ListagemDeDiasComponent implements OnInit, OnDestroy {
     public diasDaSemana: Array<DiaDaSemana> = [];
     public indexDaSemana: number = 0;
     public buscarWeeklyLogsSubscription: Subscription;
+    public primeiroDia: string;
+    public segundoDia: string;
     
     constructor(public dailyService: DailyService,
         public notifierService: NotifierService)
@@ -22,7 +24,14 @@ export class ListagemDeDiasComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        this.buscarWeeklyLogsSubscription = this.dailyService.buscarWeeklyLogs({data: moment().day(0).toDate()}).subscribe(resp => {
+        this.carregarWeeklyLogs();
+    }
+
+    public carregarWeeklyLogs()
+    {
+        this.primeiroDia = moment().day(this.indexDaSemana * 7).format('DD/MM');
+        this.segundoDia = moment().day(this.indexDaSemana * 7 + 6).format('DD/MM');
+        this.buscarWeeklyLogsSubscription = this.dailyService.buscarWeeklyLogs({data: moment().day(this.indexDaSemana * 7).toDate()}).subscribe(resp => {
             this.preencheDiasDaSemana(resp || []);
         }, err => {
             console.error(err);
@@ -41,7 +50,7 @@ export class ListagemDeDiasComponent implements OnInit, OnDestroy {
         let timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
         
         listaDeDias.forEach(dia => {
-            const diaAtual = moment().tz(timezone).day(this.indexDaSemana + dia);
+            const diaAtual = moment().tz(timezone).day(this.indexDaSemana * 7 + dia);
 
             let novoDiaDaSemana: DiaDaSemana = {
                 ano: diaAtual.year(),
@@ -87,5 +96,17 @@ export class ListagemDeDiasComponent implements OnInit, OnDestroy {
             case 6:
                 return "Sábado";
         }
+    }
+    
+    public avancarSemana()
+    {
+        this.indexDaSemana++;
+        this.carregarWeeklyLogs();
+    }
+
+    public voltarSemana()
+    {
+        this.indexDaSemana--;
+        this.carregarWeeklyLogs();
     }
 }

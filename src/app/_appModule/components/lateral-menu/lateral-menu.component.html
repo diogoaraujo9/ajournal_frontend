@@ -1,6 +1,6 @@
 <div class="lateral-menu"
-    [class.menu-open]="isMenuOpen"
-    [class.menu-closed]="!isMenuOpen">
+    [class.menu-open]="isMenuOpen && _loginService.loggedIn"
+    [class.menu-closed]="!isMenuOpen || !_loginService.loggedIn">
 
     <div>
         <div class="ajournal-logo-container">

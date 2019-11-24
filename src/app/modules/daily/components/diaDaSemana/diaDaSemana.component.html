@@ -1,6 +1,6 @@
 <div class="dia-da-semana-container"> 
     <div class="dia-da-semana">
-        {{dia.dia}}.{{dia.mes}}.{{dia.ano}} {{dia.diaDaSemana}}
+        {{dia.dia}}.{{dia.mes + 1}}.{{dia.ano}} {{dia.diaDaSemana}}
     </div>
 
     <ng-container *ngFor="let registro of dia.registros">

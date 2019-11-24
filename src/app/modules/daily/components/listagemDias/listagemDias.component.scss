@@ -61,3 +61,44 @@
     }
 }
 
+.slider-container {
+    display: flex;
+    height: 30px;
+    width: 210px;
+    background-color: $selector-gray;
+    border-radius: 5px;
+    align-items: center;
+    margin-bottom: 10px;
+    overflow: hidden;
+
+    .slider-info {
+        min-width: 40px;
+        flex-grow: 1;
+        font-family: 'Short Stack'; 
+        display: flex;
+        justify-content: center;
+    }
+    
+    .button-container {
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 26px;       
+        height: 100%;
+        cursor: pointer;
+        color: $type-gray;
+
+        &:first-child {
+            border-right: 1px solid;
+        }
+
+        &:last-child {
+            border-left: 1px solid;
+        }
+
+        &:hover {
+            background-color: $border-gray;
+        }
+    }
+}

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CoreHttpService } from '../coreHttp.service';
+import { LoginService } from './services/login.service';
 
 @Component({
   selector: 'app-root',
@@ -10,18 +11,10 @@ export class AppComponent {
     title = 'ajournal-portal';
     public isMenuOpen: boolean = true;
 
-    constructor(public httpTestService: CoreHttpService)
+    constructor(public _loginService: LoginService)
     {
     }
 
-    public testemethod()
-    {
-        this.httpTestService.postMessage().subscribe(x =>
-        {
-        }, 
-        err => {
-        });
-    }
 
     public toggleMenuPadding(_isMenuOpen: boolean)
 	{

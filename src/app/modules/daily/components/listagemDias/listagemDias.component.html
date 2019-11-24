@@ -1,3 +1,13 @@
+<div class="slider-container">    
+    <div class="button-container" (click)="voltarSemana()">
+        <i class="fas fa-chevron-left"></i>
+    </div>
+    <span class="slider-info">{{primeiroDia}} - {{segundoDia}}</span>
+    <div class="button-container" (click)="avancarSemana()">
+        <i class="fas fa-chevron-right"></i>
+    </div>
+</div>
+
 <ng-container *ngFor="let dia of diasDaSemana; let last = last"> 
     <dia-da-semana [dia]="dia"
         [ultimoDia]="last">            
